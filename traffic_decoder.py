@@ -56,13 +56,9 @@ def decode_traffic(inp):
         # Map each packet
         parsed_packet = dict()
         parsed_packet['src'] = src
+        parsed_packet['dst'] = dst
         try:
-            parced_json = j.loads(json[0])
-
-            if parced_json['method'] == "eth_sendRawTransaction" or parced_json['method'] == "eth_call":
-                parsed_packet['json'] = parced_json
-            else:
-                continue
+            parsed_packet['json'] = j.loads(json[0])
         except:
             continue
         packet_jsons.append(parsed_packet)
